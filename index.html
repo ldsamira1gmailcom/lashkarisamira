@@ -1,1 +1,224 @@
-HELLO
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Samira Lashkari</title>
+</head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lobster&family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
+
+<style>
+        
+    .content {
+        position: fixed;
+        color: #FFF;
+        background-color: rgba(0, 0, 0, .6);
+        left: 0;
+        top: 0;
+        width: 100vw;
+        height: 100vw;
+        padding: 25px;
+        text-align: center;
+        padding-top: 150px;
+    }
+
+    .title {
+        font-family: 'Lobster', cursive;
+    }
+
+    .bio {
+        font-family: 'Open Sans', sans-serif;
+        width: 50%;
+        margin: 0 auto;
+    }
+
+    #contact-button {
+        width: 160px;
+        height: 25px;
+        line-height: 25px;
+        text-transform: uppercase;
+        margin-top: 25px;
+        display: none;
+        background-color: #fff;
+        color: #0077B7;
+        border-radius: 3px;
+        text-decoration: none;
+        padding: 5px 15px;
+        transition: all .5s;
+    }
+
+    #contact-button:hover {
+        background-color: #0077B7;
+        color: #fff;
+        text-indent: -33px;
+    }
+
+    #contact-button:hover img {
+        visibility: hidden;
+    }
+
+    #contact-button img {
+        position: relative;
+        top: 3px;
+        margin-right: 10px;
+
+    }
+
+    #bg-video {
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100vw;
+        object-fit: fill;
+    }
+
+
+    /* animation of title */
+    .ml5 {
+        position: relative;
+        font-weight: 300;
+        font-size: 4.5em;
+    }
+
+    .ml5 .text-wrapper {
+        position: relative;
+        display: inline-block;
+        padding-top: 0.1em;
+        padding-right: 0.05em;
+        padding-bottom: 0.15em;
+        line-height: 1em;
+    }
+
+    .ml5 .line {
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        height: 3px;
+        width: 100%;
+        background-color: #fff;
+        transform-origin: 0.5 0;
+    }
+
+    .ml5 .ampersand {
+        font-family: Baskerville, serif;
+        font-style: italic;
+        font-weight: 400;
+        width: 1em;
+        margin-right: -0.1em;
+        margin-left: -0.1em;
+    }
+
+    .ml5 .letters {
+        display: inline-block;
+        opacity: 0;
+    }
+
+    /* animation of body */
+    .ml3 {
+        font-weight: 900;
+    }
+</style>
+
+<body>
+    <video autoplay muted loop="true" id="bg-video">
+        <source src="./media/background.mp4" type="video/mp4">
+    </video>
+
+    <div class="content">
+        <div class="title">
+            <h1 class="ml5">
+                <span class="text-wrapper">
+                    <span class="line line1"></span>
+                    <span class="letters letters-left">Samira</span>
+                    <span class="letters letters-right">Lashkari</span>
+                    <span class="line line2"></span>
+                </span>
+            </h1>
+        </div>
+        <div class="bio">
+            <p class="ml3">
+                I am an Android developer with industry experience building mobile applications. I specialize in Java
+                and
+                have experience working with Flutter.
+                Take a look at my work or get in touch!
+            </p>
+            <a id="contact-button" target="_blank" href="https://www.linkedin.com/in/samira-lashkari-26382295">
+                <img width="20" src="media/linked-in.png" alt="linked-in">
+                Contact Me
+            </a>
+        </div>
+    </div>
+
+</body>
+
+<script>
+    function animateTitle() {
+        anime.timeline({ loop: false })
+            .add({
+                targets: '.ml5 .line',
+                opacity: [0.5, 1],
+                scaleX: [0, 1],
+                easing: "easeInOutExpo",
+                duration: 700
+            }).add({
+                targets: '.ml5 .line',
+                duration: 600,
+                easing: "easeOutExpo",
+                translateY: (el, i) => (-0.625 + 0.625 * 2 * i) + "em"
+            }).add({
+                targets: '.ml5 .ampersand',
+                opacity: [0, 1],
+                scaleY: [0.5, 1],
+                easing: "easeOutExpo",
+                duration: 600,
+                offset: '-=600'
+            }).add({
+                targets: '.ml5 .letters-left',
+                opacity: [0, 1],
+                translateX: ["0.5em", 0],
+                easing: "easeOutExpo",
+                duration: 600,
+                offset: '-=300'
+            }).add({
+                targets: '.ml5 .letters-right',
+                opacity: [0, 1],
+                translateX: ["-0.5em", 0],
+                easing: "easeOutExpo",
+                duration: 600,
+                offset: '-=600'
+            })
+    }
+    function animateBody() {
+        var textWrapper = document.querySelector('.ml3');
+        textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
+
+        anime.timeline({ loop: false })
+            .add({
+                targets: '.ml3 .letter',
+                opacity: [0, 1],
+                easing: "easeInOutQuad",
+                duration: 100,
+                delay: (el, i) => 15 * (i + 1)
+            });
+    }
+</script>
+
+<script>
+    animateTitle();
+    animateBody();
+
+    setTimeout(() => {
+        document.getElementById('contact-button').style.display="inline-block";
+    },3000)
+</script>
+
+
+</html>`
